@@ -12,9 +12,13 @@ const API = axios.create({
 // Request interceptor to add the auth token to every request if logged in
 API.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
+    const accessToken = localStorage.getItem('accessToken');
+    const client = localStorage.getItem('client');
+    const uid = localStorage.getItem('uid');
+    if (accessToken && client && uid) {
+      config.headers['access-token'] = accessToken;
+      config.headers['client'] = client;
+      config.headers['uid'] = uid;
     }
     return config;
   },

@@ -21,7 +21,7 @@ function Login() {
       const response = await API.post('/auth/sign_in', credentials);
       console.log(response.headers['access-token']);
       if (response.headers['access-token']) {
-        localStorage.setItem('authToken', response.headers['access-token']);
+        localStorage.setItem('accessToken', response.headers['access-token']);
         localStorage.setItem('client', response.headers['client']);
         localStorage.setItem('uid', response.headers['uid']);
         login();

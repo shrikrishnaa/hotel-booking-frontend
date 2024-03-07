@@ -26,7 +26,6 @@ function EditHotel() {
         });
       } catch (error) {
         console.error("Failed to fetch hotel details:", error);
-        // Handle failure (e.g., redirecting to an error page or displaying a message)
       }
     };
     fetchHotelDetails();

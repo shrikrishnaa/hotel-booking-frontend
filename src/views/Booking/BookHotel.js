@@ -7,9 +7,9 @@ function BookHotel() {
   const navigate = useNavigate();
   const [hotel, setHotel] = useState(null);
   const [bookingData, setBookingData] = useState({
-    numberOfRooms: 1,
-    checkInDate: '',
-    checkOutDate: '',
+    rooms_count: 1,
+    check_in: '',
+    check_out: '',
   });
   const [availableRooms, setAvailableRooms] = useState(0); // State to track available rooms
 
@@ -29,7 +29,7 @@ function BookHotel() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'numberOfRooms' && value > availableRooms) {
+    if (name === 'rooms_count' && value > availableRooms) {
       alert(`Only ${availableRooms} rooms are available.`);
       return;
     }
@@ -38,14 +38,13 @@ function BookHotel() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Additional validation could be implemented here
     try {
       await API.post('/bookings', {
         ...bookingData,
-        hotelId: id,
+        hotel_id: id,
       });
       alert('Booking successful!');
-      navigate(`/hotels/${id}`); // Or to a booking confirmation page
+      navigate(`/hotels/${id}`);
     } catch (error) {
       console.error('Booking failed:', error);
       alert('Booking failed. Please try again.');
@@ -69,8 +68,8 @@ function BookHotel() {
             Number of Rooms:
             <input
               type="number"
-              name="numberOfRooms"
-              value={bookingData.numberOfRooms}
+              name="rooms_count"
+              value={bookingData.rooms_count}
               onChange={handleChange}
               min="1"
               max={availableRooms} // Ensure users can't request more rooms than available
@@ -83,8 +82,8 @@ function BookHotel() {
             Check-in Date:
             <input
               type="date"
-              name="checkInDate"
-              value={bookingData.checkInDate}
+              name="check_in"
+              value={bookingData.check_in}
               onChange={handleChange}
               required
             />
@@ -95,8 +94,8 @@ function BookHotel() {
             Check-out Date:
             <input
               type="date"
-              name="checkOutDate"
-              value={bookingData.checkOutDate}
+              name="check_out"
+              value={bookingData.check_out}
               onChange={handleChange}
               required
             />
